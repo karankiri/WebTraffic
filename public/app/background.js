@@ -2,14 +2,16 @@
     const tabStorage = {};
     const networkFilters = {
         urls: [
+          "*://razorpay.com/*",
             "*://developer.mozilla.org/*"
         ]
     };
 
     chrome.webRequest.onBeforeRequest.addListener((details) => {
+        console.log("🚀 ~ file: background.js ~ line 11 ~ chrome.webRequest.onBeforeRequest.addListener ~ details", details)
         const { tabId, requestId, url, timeStamp } = details;
         if (!tabStorage.hasOwnProperty(tabId)) {
-            return;
+          return;
         }
 
         tabStorage[tabId].requests[requestId] = {
@@ -19,7 +21,7 @@
             status: 'pending'
         };
         console.log(tabStorage[tabId].requests[requestId]);
-    }, networkFilters);
+    }, networkFilters, ['requestBody']);
 
     chrome.webRequest.onCompleted.addListener((details) => {
         const { tabId, requestId, timeStamp } = details;

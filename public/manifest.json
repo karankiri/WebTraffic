@@ -19,6 +19,7 @@
   },
   "permissions": [
     "webRequest",
-    "*://developer.mozilla.org/"
+    "*://developer.mozilla.org/",
+    "*://razorpay.com/*"
   ]
 }
